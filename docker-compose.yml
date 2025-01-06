@@ -1,0 +1,12 @@
+services: 
+  app:
+    build: 
+      context: .
+    command: bundle exec rails s -b 0.0.0.0
+    volumes: 
+       /root/develop/api_chat:/app
+      working_dir: /app 
+      ports:
+        - "3000:3000"
+        
+  test: 
