@@ -1,26 +1,32 @@
 services: 
-  postgres_db:
-    image: postgres 
-    environment:
-      POSTGRES_USER: owner 
-      POSTGRES_PASSWORD: postgres 
-    ports: 
-      - "5432:5432"
-    volumes: 
-      - /root/api_chat/tmp/db:/var/lib/postgresql/data  
-  
   app:
+    tty: true 
+    stdin_open: true 
     build: 
       context: .
       dockerfile: Dockerfile.dev
+    image: chat_api:local
+    env_file:
+      - .env
+      - .env.local  
     command: bundle exec rails s -b 0.0.0.0 
     volumes: 
-      - /root/api_chat:/app 
-    working_dir: /app 
+      - ./:/rails
     ports: 
       - "3000:3000" 
     depends_on: 
-      - postgres_db 
+      - postgres
+
+  postgres:
+    image: postgres:latest 
+    environment:
+      POSTGRES_USER: owner 
+      POSTGRES_PASSWORD: postgres 
+      ALLOW_EMPTY_PASSWORD: yes
+    ports: 
+      - "5432:5432"  
+    volumes: 
+      - ./postgres:/var/lib/postgresql/data  
     
 
   
