@@ -21,8 +21,8 @@ RUN apt-get update -qq && \
 
 COPY Gemfile* ${APPDIR}/
 
-RUN gem install bundler -v 2.6.2 && bundle config --local build.sassc --disable-march-tune-namtive
-
+RUN gem install bundler -v 2.5.22 && bundle config --local build.sassc --disable-march-tune-namtive
+RUN bundle install 
 COPY . .
 
 FROM base
