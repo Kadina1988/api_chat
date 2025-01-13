@@ -5,4 +5,8 @@ FactoryBot.define do
     password { '5555555' }
     phone_number { '73988888888' }
   end
+
+  trait :confirmed do
+    confirmed_at { Time.zone.now }
+  end
 end

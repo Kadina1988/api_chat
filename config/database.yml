@@ -2,8 +2,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   database: <%= ENV['DB_NAME'] %>
-  username: postgres #<%= ENV['DB_USER'] %>
-  password: postgres #<%= ENV['DB_PASSWORD'] %>
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
   host: <%= ENV['DB_HOST'] %>
   port: 5432 #<%= ENV['DB_PORT'] %>
   # For details on connection pooling, see Rails configuration guide
