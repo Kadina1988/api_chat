@@ -1,15 +1,16 @@
-class Api::V1::RegistrationsController < Devise::RegistrationsController
-  # def create
-  #   debugger
-  # end
+module Api 
+  module V1 
+    class RegistrationsController < Devise::RegistrationsController
 
-  private
+      private
 
-  def respond_with(resource, params = {})
-    if resource.persisted?
-      render json: resource, status: :created
-    else
-      render json: resource.errors.messages, status: :unprocessable_entity
+      def respond_with(resource, params = {})
+        if resource.persisted?
+          render json: resource, status: :created
+        else
+          render json: resource.errors.messages, status: :unprocessable_entity
+        end
+      end
     end
   end
 end

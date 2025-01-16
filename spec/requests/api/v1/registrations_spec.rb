@@ -18,13 +18,11 @@ RSpec.describe "Registrations", type: :request do
 
       it 'should return status code 201' do
         subject
-        json = JSON.parse(response.body)
         expect(response).to have_http_status(:created)
       end
 
       it 'should return proper attributes' do
         subject
-        json = JSON.parse(response.body)
         expect(json['data']['attributes']['email']).to eq('jon@mail.com')
       end
 
@@ -55,7 +53,6 @@ RSpec.describe "Registrations", type: :request do
 
         it 'should return nickname error' do
           subject
-          json = JSON.parse(response.body)
           expect(json['nickname']).to include("can't be blank")
         end
       end
@@ -76,7 +73,6 @@ RSpec.describe "Registrations", type: :request do
 
         it "should return email error" do
           subject
-          json = JSON.parse(response.body)
           expect(json['email']).to include('has already been taken')
         end
 
