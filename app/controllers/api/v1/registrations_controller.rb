@@ -1,7 +1,6 @@
-module Api 
-  module V1 
+module Api
+  module V1
     class RegistrationsController < Devise::RegistrationsController
-
       private
 
       def respond_with(resource, params = {})
