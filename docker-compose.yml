@@ -1,0 +1,45 @@
+services:
+  app:
+    tty: true
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: chat_api:local
+    env_file:
+      - .env
+      - .env.local
+    command: bundle exec rails s -b 0.0.0.0
+    volumes:
+      - ./:/rails
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+
+  test:
+    image: chat_api:local
+    command: bundle exec rspec --format documentation
+    environment:
+      RAILS_ENV: test
+    env_file:
+      - .env
+      - .env.test
+    depends_on:
+      - postgres
+    volumes:
+      - ./:/rails
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      ALLOW_EMPTY_PASSWORD: yes
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+
+volumes:
+  postgres:
