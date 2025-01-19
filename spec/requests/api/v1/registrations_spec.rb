@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Registrations", type: :request do
-  describe "POST /qpi/v1/sign_up" do
+  describe "POST /api/v1/sign_up" do
     context 'when the correct request sent' do
       let(:valid_attributes) do
         {
